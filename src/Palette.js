@@ -10,7 +10,6 @@ export default class Palette extends Component {
         ));
         return (
             <div className="Palette">
-                <h1>Palette</h1>
                 {/* navbar here */}
                 <div className="Palette-colors">
                     {/* bunch of colour boxes */}
