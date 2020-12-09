@@ -31,7 +31,6 @@ class App extends Component{
   syncLocalStorage() {
     // save to local storage
     window.localStorage.setItem("palettes", JSON.stringify(this.state.palettes));
-    
   }
 
   render() {
