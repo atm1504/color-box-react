@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styles from "./styles/ColorBoxStyles";
 import { withStyles } from "@material-ui/styles";
 import classNames from "classnames";
+
 class ColorBox extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +40,7 @@ class ColorBox extends Component {
             })}
           >
             <h1>copied!</h1>
-            <p className={classes.copyText}>{this.props.background}</p>
+            <p className={classes.copyText}>{background}</p>
           </div>
           <div>
             <div className={classes.boxContent}>
