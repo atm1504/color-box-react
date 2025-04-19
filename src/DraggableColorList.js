@@ -26,10 +26,12 @@ function DraggableColorList({ colors, removeColor, onSortEnd }) {
     const handleDragEnd = (event) => {
         const { active, over } = event;
         
-        if (active.id !== over.id) {
+        if (active && over && active.id !== over.id) {
             const oldIndex = colors.findIndex((color) => color.name === active.id);
             const newIndex = colors.findIndex((color) => color.name === over.id);
-            onSortEnd({ oldIndex, newIndex });
+            if (oldIndex !== -1 && newIndex !== -1) {
+                onSortEnd({ oldIndex, newIndex });
+            }
         }
     };
 
