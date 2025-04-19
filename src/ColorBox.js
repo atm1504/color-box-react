@@ -2,8 +2,42 @@ import React, { Component } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
 import styles from "./styles/ColorBoxStyles";
-import { withStyles } from "@material-ui/core/styles";
+import { styled } from "@mui/material/styles";
 import classNames from "classnames";
+import chroma from "chroma-js";
+
+const Root = styled('div')(({ theme, background, showingFullPalette }) => ({
+  ...styles.root,
+  backgroundColor: background,
+  '& .copyOverlay': {
+    ...styles.copyOverlay,
+    backgroundColor: background
+  },
+  '& .copyOverlay.show': styles.showOverlay,
+  '& .copyMessage': styles.copyMessage,
+  '& .copyMessage.show': styles.showMessage,
+  '& .copyText': {
+    ...styles.copyText,
+    color: theme => 
+      chroma(background).luminance() >= 0.7 ? "black" : "white"
+  },
+  '& .colorName': {
+    ...styles.colorName,
+    color: theme =>
+      chroma(background).luminance() <= 0.08 ? "white" : "black"
+  },
+  '& .seeMore': {
+    ...styles.seeMore,
+    color: theme =>
+      chroma(background).luminance() >= 0.7 ? "rgba(0,0,0,0.6)" : "white"
+  },
+  '& .copyButton': {
+    ...styles.copyButton,
+    color: theme =>
+      chroma(background).luminance() >= 0.7 ? "rgba(0,0,0,0.6)" : "white"
+  },
+  '& .boxContent': styles.boxContent
+}));
 
 class ColorBox extends Component {
   constructor(props) {
@@ -21,41 +55,39 @@ class ColorBox extends Component {
       name,
       background,
       moreUrl,
-      showingFullPalette,
-      classes
+      showingFullPalette
     } = this.props;
     const { copied } = this.state;
     return (
       <CopyToClipboard text={background} onCopy={this.changeCopyState}>
-        <div style={{ background }} className={classes.ColorBox}>
+        <Root background={background} showingFullPalette={showingFullPalette}>
           <div
-            style={{ background }}
-            className={classNames(classes.copyOverlay, {
-              [classes.showOverlay]:copied
+            className={classNames("copyOverlay", {
+              show: copied
             })}
           />
           <div
-            className={classNames(classes.copyMessage, {
-              [classes.showMessage]:copied
+            className={classNames("copyMessage", {
+              show: copied
             })}
           >
             <h1>copied!</h1>
-            <p className={classes.copyText}>{background}</p>
+            <p className="copyText">{background}</p>
           </div>
           <div>
-            <div className={classes.boxContent}>
-              <span className={classes.colorName}>{name}</span>
+            <div className="boxContent">
+              <span className="colorName">{name}</span>
             </div>
-            <button className={classes.copyButton}>Copy</button>
+            <button className="copyButton">Copy</button>
           </div>
           {showingFullPalette && (
             <Link to={moreUrl} onClick={e => e.stopPropagation()}>
-              <span className={classes.seeMore}>MORE</span>
+              <span className="seeMore">MORE</span>
             </Link>
           )}
-        </div>
+        </Root>
       </CopyToClipboard>
     );
   }
 }
-export default withStyles(styles)(ColorBox);
+export default ColorBox;

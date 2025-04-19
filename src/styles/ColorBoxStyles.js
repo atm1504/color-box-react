@@ -1,17 +1,15 @@
 import chroma from "chroma-js";
 import sizes from "./sizes";
 
-const PREFIX = 'ColorBox';
-
 const styles = {
-  ColorBox: {
+  root: {
     width: "20%",
     height: props => (props.showingFullPalette ? "25%" : "50%"),
     margin: "0 auto",
     display: "inline-block",
     position: "relative",
     cursor: "pointer",
-    marginBottom: "-3.5px",
+    marginBottom: "-4px",
     "&:hover button": {
       opacity: 1
     },
@@ -77,7 +75,8 @@ const styles = {
     left: "0px",
     bottom: "0px",
     padding: "10px",
-    color: "black",
+    color: props =>
+      chroma(props.background).luminance() <= 0.08 ? "white" : "black",
     letterSpacing: "1px",
     textTransform: "uppercase",
     fontSize: "12px"
@@ -120,7 +119,7 @@ const styles = {
       padding: "1rem",
       textTransform: "uppercase",
       [sizes.down("xs")]: {
-        fontSize: "6rem"
+        fontSize: "5rem"
       }
     },
     "& p": {
