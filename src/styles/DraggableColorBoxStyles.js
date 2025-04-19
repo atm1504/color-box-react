@@ -11,7 +11,8 @@ const styles = {
         marginBottom: "-6px",
         "&:hover": {
             "& .deleteIcon": {
-                opacity: 1
+                opacity: 1,
+                transform: "scale(1.3)"
             }
         },
         [sizes.down("lg")]: {
@@ -38,14 +39,25 @@ const styles = {
         fontSize: "12px",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        color: "rgba(0, 0, 0, 0.5)"
     },
     deleteIcon: {
         opacity: 0,
+        color: "rgba(0, 0, 0, 0.5)",
         width: "20px",
         height: "20px",
+        padding: "5px",
         transition: "all 0.3s ease-in-out",
-        zIndex: 10
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 10,
+        "&:hover": {
+            color: "white",
+            transform: "scale(1.3)"
+        }
     }
 };
 

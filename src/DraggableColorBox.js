@@ -15,13 +15,7 @@ const Root = styled('div')(({ theme, color }) => ({
     },
     '& .deleteIcon': {
         ...styles.deleteIcon,
-        color: chroma(color).luminance() <= 0.08 ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.6)",
-        transition: 'all 0.3s ease-in-out',
-        '&:hover': {
-            color: "white",
-            transform: "scale(1.3)",
-            cursor: "pointer"
-        }
+        color: chroma(color).luminance() <= 0.08 ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.6)"
     }
 }));
 
@@ -43,7 +37,9 @@ function DraggableColorBox(props) {
     const onDeleteClick = (e) => {
         e.stopPropagation();
         e.preventDefault();
-        handleClick();
+        if (handleClick) {
+            handleClick();
+        }
     };
 
     return (
@@ -56,10 +52,13 @@ function DraggableColorBox(props) {
         >
             <div className="boxContent">
                 <span>{name}</span>
-                <DeleteIcon 
+                <div 
                     className="deleteIcon"
                     onClick={onDeleteClick}
-                />
+                    onTouchEnd={onDeleteClick}
+                >
+                    <DeleteIcon />
+                </div>
             </div>
         </Root>
     );

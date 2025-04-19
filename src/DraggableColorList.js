@@ -8,7 +8,6 @@ import {
     useSensors,
 } from "@dnd-kit/core";
 import {
-    arrayMove,
     SortableContext,
     sortableKeyboardCoordinates,
     rectSortingStrategy,
@@ -17,7 +16,11 @@ import DraggableColorBox from "./DraggableColorBox";
 
 function DraggableColorList({ colors, removeColor, onSortEnd }) {
     const sensors = useSensors(
-        useSensor(PointerSensor),
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                distance: 10,
+            },
+        }),
         useSensor(KeyboardSensor, {
             coordinateGetter: sortableKeyboardCoordinates,
         })
@@ -46,15 +49,17 @@ function DraggableColorList({ colors, removeColor, onSortEnd }) {
                     items={colors.map(color => color.name)}
                     strategy={rectSortingStrategy}
                 >
-                    {colors.map((color, i) => (
-                        <DraggableColorBox
-                            key={color.name}
-                            id={color.name}
-                            color={color.color}
-                            name={color.name}
-                            handleClick={() => removeColor(color.name)}
-                        />
-                    ))}
+                    <div style={{ height: "100%" }}>
+                        {colors.map((color) => (
+                            <DraggableColorBox
+                                key={color.name}
+                                id={color.name}
+                                color={color.color}
+                                name={color.name}
+                                handleClick={() => removeColor(color.name)}
+                            />
+                        ))}
+                    </div>
                 </SortableContext>
             </DndContext>
         </div>
