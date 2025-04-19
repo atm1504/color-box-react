@@ -1,4 +1,9 @@
-export default {
+const sizes = {
+  xs: "320px",
+  sm: "576px",
+  md: "768px",
+  lg: "992px",
+  xl: "1200px",
   up() {},
   down(size) {
     const sizes = {
@@ -11,3 +16,5 @@ export default {
     return `@media (max-width: ${sizes[size]})`;
   }
 };
+
+export default sizes;

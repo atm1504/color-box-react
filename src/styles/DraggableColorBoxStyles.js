@@ -1,5 +1,8 @@
 import sizes from "./sizes";
 import chroma from "chroma-js";
+
+const PREFIX = 'DraggableColorBox';
+
 const styles = {
     root: {
         width: "20%",
@@ -12,39 +15,54 @@ const styles = {
         "&:hover svg": {
             color: "white",
             transform: "scale(1.5)"
+        },
+        "&:hover $boxContent": {
+            width: "60%",
+            padding: "0 4px",
+            fontSize: "1rem",
+            transition: "all 0.3s ease-in-out"
+        },
+        "&:hover $deleteIcon": {
+            color: "white",
+            transform: "scale(1.5)"
         }
     },
     boxContent: {
         position: "absolute",
-        width: "100%",
-        left: "0px",
-        bottom: "0px",
-        padding: "10px",
-        color: props =>
-            chroma(props.color).luminance() <= 0.08
-                ? "rgba(255,255,255,0.8)"
-                : "rgba(0,0,0,0.6)",
-        letterSpacing: "1px",
-        textTransform: "uppercase",
-        fontSize: "12px",
+        width: "50%",
+        height: "20%",
         display: "flex",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "0 5px",
+        color: "rgba(255, 255, 255, 0.7)",
+        textTransform: "uppercase",
+        fontSize: "0.8rem"
     },
     deleteIcon: {
-        transition: "all 0.3s ease-in-out"
+        transition: "all 0.3s ease-in-out",
+        "&:hover": {
+            color: "white"
+        }
     },
     [sizes.down("lg")]: {
-      width: "25%",
-      height: "20%"
+        root: {
+            width: "25%",
+            height: "20%"
+        }
     },
     [sizes.down("md")]: {
-      width: "50%",
-      height: "10%"
+        root: {
+            width: "50%",
+            height: "10%"
+        }
     },
     [sizes.down("sm")]: {
-        width: "100%",
-        height: "5%"
+        root: {
+            width: "100%",
+            height: "5%"
+        }
     }
-}
+};
 
 export default styles;

@@ -1,17 +1,20 @@
+const PREFIX = 'ColorPickerForm';
+
 const styles = {
-  picker: {
+  [`& .${PREFIX}-picker`]: {
     width: "100% !important",
     marginTop: "2rem"
   },
-  addColor: {
+  [`& .${PREFIX}-addColor`]: {
     width: "100%",
     padding: "1rem",
     marginTop: "1rem",
     fontSize: "2rem"
   },
-  colorNameInput: {
+  [`& .${PREFIX}-colorNameInput`]: {
     width: "100%",
     height: "70px"
   }
 };
+
 export default styles;

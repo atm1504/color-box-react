@@ -1,4 +1,6 @@
-export default {
+const PREFIX = 'MiniPalette';
+
+const styles = {
   root: {
     backgroundColor: "white",
     border: "1px solid black",
@@ -7,8 +9,10 @@ export default {
     position: "relative",
     overflow: "hidden",
     cursor: "pointer",
-    "&:hover svg": {
-      opacity: 1
+    "&:hover": {
+      "& svg": {
+        opacity: 1
+      }
     }
   },
   colors: {
@@ -40,7 +44,6 @@ export default {
     position: "relative",
     marginBottom: "-3.5px"
   },
-   delete: {},
   deleteIcon: {
     color: "white",
     backgroundColor: "#eb3d30",
@@ -51,6 +54,9 @@ export default {
     top: "0px",
     padding: "10px",
     zIndex: 10,
-    opacity: 0
-  }	  
+    opacity: 0,
+    transition: "all 0.3s ease-in-out"
+  }
 };
+
+export default styles;

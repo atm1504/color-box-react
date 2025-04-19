@@ -1,5 +1,6 @@
 import sizes from "./sizes";
-export default {
+
+const styles = {
   Palette: {
     height: "100vh",
     display: "flex",
@@ -51,3 +52,5 @@ export default {
     }
   }
 };
+
+export default styles;
